@@ -1,9 +1,9 @@
-# Django School
+# Digitized Voting for Academic Institutions
 
 [![Python Version](https://img.shields.io/badge/python-3.7-brightgreen.svg)](https://python.org)
 [![Django Version](https://img.shields.io/badge/django-2.0-brightgreen.svg)](https://djangoproject.com)
 
-This is an example project to illustrate an implementation of multiple user types. In this Django app, teachers can create quizzes and students can sign up and take quizzes related to their interests.
+This is a project to complement by research and in fulfillment of my computer science degree. The project offers an effective solution to the expensive, time-consuming elections across most Academic Institutions. COVID-19 brought everything to a standstill in 2020 and this partly inspired research into this. 
 
 ## Running the Project Locally
 
