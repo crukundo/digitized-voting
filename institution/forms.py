@@ -3,8 +3,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 from django.forms.utils import ValidationError
 
-from classroom.models import (Answer, Question, Student, StudentAnswer,
-                              Subject, User)
+from institution.models import (Candidate, Position, Student, VotedElection,
+                              Faculty, User)
 
 
 class TeacherSignUpForm(UserCreationForm):
@@ -20,8 +20,8 @@ class TeacherSignUpForm(UserCreationForm):
 
 
 class StudentSignUpForm(UserCreationForm):
-    interests = forms.ModelMultipleChoiceField(
-        queryset=Subject.objects.all(),
+    faculty = forms.ModelMultipleChoiceField(
+        queryset=Faculty.objects.all(),
         widget=forms.CheckboxSelectMultiple,
         required=True
     )
@@ -35,26 +35,26 @@ class StudentSignUpForm(UserCreationForm):
         user.is_student = True
         user.save()
         student = Student.objects.create(user=user)
-        student.interests.add(*self.cleaned_data.get('interests'))
+        student.faculty.add(*self.cleaned_data.get('faculty'))
         return user
 
 
-class StudentInterestsForm(forms.ModelForm):
+class StudentFacultyForm(forms.ModelForm):
     class Meta:
         model = Student
-        fields = ('interests', )
+        fields = ('faculty', )
         widgets = {
-            'interests': forms.CheckboxSelectMultiple
+            'faculty': forms.CheckboxSelectMultiple
         }
 
 
-class QuestionForm(forms.ModelForm):
+class PositionForm(forms.ModelForm):
     class Meta:
-        model = Question
+        model = Position
         fields = ('text', )
 
 
-class BaseAnswerInlineFormSet(forms.BaseInlineFormSet):
+class BaseCandidateInlineFormSet(forms.BaseInlineFormSet):
     def clean(self):
         super().clean()
 
@@ -65,21 +65,21 @@ class BaseAnswerInlineFormSet(forms.BaseInlineFormSet):
                     has_one_correct_answer = True
                     break
         if not has_one_correct_answer:
-            raise ValidationError('Mark at least one answer as correct.', code='no_correct_answer')
+            raise ValidationError('Please vote one of the candidates.', code='no_correct_answer')
 
 
-class TakeQuizForm(forms.ModelForm):
-    answer = forms.ModelChoiceField(
-        queryset=Answer.objects.none(),
+class VoteForm(forms.ModelForm):
+    candidate = forms.ModelChoiceField(
+        queryset=Candidate.objects.none(),
         widget=forms.RadioSelect(),
         required=True,
         empty_label=None)
 
     class Meta:
-        model = StudentAnswer
-        fields = ('answer', )
+        model = VotedElection
+        fields = ('candidate', )
 
     def __init__(self, *args, **kwargs):
-        question = kwargs.pop('question')
+        position = kwargs.pop('position')
         super().__init__(*args, **kwargs)
-        self.fields['answer'].queryset = question.answers.order_by('text')
+        self.fields['candidate'].queryset = position.candidates.order_by('full_name')

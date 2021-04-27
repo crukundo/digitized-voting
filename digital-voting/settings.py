@@ -42,7 +42,7 @@ INSTALLED_APPS = [
 
     'crispy_forms',
 
-    'classroom',
+    'institution',
 ]
 
 MIDDLEWARE = [
@@ -115,7 +115,7 @@ STATICFILES_DIRS = [
 
 # Custom Django auth settings
 
-AUTH_USER_MODEL = 'classroom.User'
+AUTH_USER_MODEL = 'institution.User'
 
 LOGIN_URL = 'login'
 
