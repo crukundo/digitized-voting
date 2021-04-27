@@ -60,22 +60,15 @@ class BaseCandidateInlineFormSet(forms.BaseInlineFormSet):
     def clean(self):
         super().clean()
 
-        has_one_correct_answer = False
-        for form in self.forms:
-            if not form.cleaned_data.get('DELETE', False):
-                if form.cleaned_data.get('is_correct', False):
-                    has_one_correct_answer = True
-                    break
-        if not has_one_correct_answer:
-            raise ValidationError('Please vote one of the candidates.', code='no_correct_answer')
-
 
 class VoteForm(forms.ModelForm):
     candidate = forms.ModelChoiceField(
         queryset=Candidate.objects.none(),
         widget=forms.RadioSelect(),
         required=True,
-        empty_label=None)
+        empty_label=None,
+        label="Candidates", 
+        help_text="Select your desired candidate and hit next")
 
     class Meta:
         model = VotedElection

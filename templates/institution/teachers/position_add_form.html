@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'teachers:election_change_list' %}">All Elections</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'teachers:election_change' election.pk %}">{{ election.name }}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Add a new position</li>
+    </ol>
+  </nav>
+  <h2 class="mb-3">Add a new position</h2>
+  <p class="lead">Add first the title of the position. In the next step you will be able to add the available candidates.</p>
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-success">Save</button>
+    <a href="{% url 'teachers:election_change' election.pk %}" class="btn btn-outline-secondary" role="button">Nevermind</a>
+  </form>
+{% endblock %}

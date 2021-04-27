@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% include 'institution/students/_header.html' with active='new' %}
+  <div class="card">
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Election</th>
+          <th>Faculty</th>
+          <th>Available Positions</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for election in elections %}
+          <tr>
+            <td class="align-middle">{{ election.name }}</td>
+            <td class="align-middle">{{ election.faculty.get_html_badge }}</td>
+            <td class="align-middle">{{ election.positions_count }} positions</td>
+            <td class="text-right">
+              <a href="{% url 'students:vote' election.pk %}" class="btn btn-primary">Start voting</a>
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td class="bg-light text-center font-italic" colspan="4">No elections in any of your university faculties right now.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

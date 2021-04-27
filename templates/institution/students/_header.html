@@ -1,0 +1,14 @@
+<h2>Elections</h2>
+<p class="text-muted">
+  Student's Faculties:{% for faculty in user.student.faculty.all %} {{ faculty.get_html_badge }}{% endfor %}
+  <a href="{% url 'students:student_faculty' %}"><small>(update faculties)</small></a>
+</p>
+
+<ul class="nav nav-tabs mb-3">
+  <li class="nav-item">
+    <a class="nav-link{% if active == 'new' %} active{% endif %}" href="{% url 'students:election_list' %}">New</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link{% if active == 'taken' %} active{% endif %}" href="{% url 'students:voted_elections_list' %}">Taken</a>
+  </li>
+</ul>

@@ -6,8 +6,8 @@
   <div class="progress mb-3">
     <div class="progress-bar" role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ progress }}%"></div>
   </div>
-  <h2 class="mb-3">{{ quiz.name }}</h2>
-  <p class="lead">{{ question.text }}</p>
+  <h2 class="mb-3">{{ election.name }}</h2>
+  <p class="lead">Position: {{ position.text }}</p>
   <form method="post" novalidate>
     {% csrf_token %}
     {{ form|crispy }}

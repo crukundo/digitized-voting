@@ -39,7 +39,7 @@ class StudentFacultyView(UpdateView):
         return self.request.user.student
 
     def form_valid(self, form):
-        messages.success(self.request, 'Interests updated with success!')
+        messages.success(self.request, 'Faculties updated successfully!')
         return super().form_valid(form)
 
 
@@ -68,8 +68,8 @@ class VotedElectionListView(ListView):
     template_name = 'institution/students/voted_elections_list.html'
 
     def get_queryset(self):
-        queryset = self.request.user.student.taken_quizzes \
-            .select_related('election', 'election__position') \
+        queryset = self.request.user.student.voted_elections \
+            .select_related('election', 'election__faculty') \
             .order_by('election__name')
         return queryset
 

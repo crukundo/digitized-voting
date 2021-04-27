@@ -41,6 +41,7 @@ class Position(models.Model):
 
 class Candidate(models.Model):
     position = models.ForeignKey(Position, on_delete=models.CASCADE, related_name='candidates')
+    mugshot = models.ImageField(upload_to='candidates/', blank=True, null=True)
     full_name = models.CharField('Candidate full name', max_length=255)
 
     def __str__(self):
@@ -54,11 +55,11 @@ class Student(models.Model):
     email = models.EmailField(default=False, blank=True, null=True)
     mobile = models.CharField(blank=True, max_length=20, null=True)
 
-    def get_unvoted_positions(self, quiz):
-        voted_positions = self.voted_election \
+    def get_unvoted_positions(self, election):
+        voted_positions = self.election_candidate \
             .filter(candidate__position__election=election) \
             .values_list('candidate__position__pk', flat=True)
-        positions = election.positions.exclude(pk__in=voted_positions).order_by('full_name')
+        positions = election.positions.exclude(pk__in=voted_positions).order_by('text')
         return positions
 
     def __str__(self):

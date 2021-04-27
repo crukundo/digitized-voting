@@ -5,25 +5,28 @@
 {% block content %}
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{% url 'teachers:election_change_list' %}">My Quizzes</a></li>
-      <li class="breadcrumb-item"><a href="{% url 'teachers:election_change' quiz.pk %}">{{ quiz.name }}</a></li>
-      <li class="breadcrumb-item active" aria-current="page">{{ question.text }}</li>
+      <li class="breadcrumb-item"><a href="{% url 'teachers:election_change_list' %}">All Elections</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'teachers:election_change' election.pk %}">{{ election.name }}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{ position.text }}</li>
     </ol>
   </nav>
-  <h2 class="mb-3">{{ question.txt }}</h2>
-  <form method="post" novalidate>
+  <h2 class="mb-3">{{ position.text }}</h2>
+  <form method="post" enctype="multipart/form-data" novalidate>
     {% csrf_token %}
     {{ formset.management_form }}
     {{ form|crispy }}
     <div class="card mb-3{% if formset.errors %} border-danger{% endif %}">
       <div class="card-header">
         <div class="row">
-          <div class="col-8">
-            <strong>Answers</strong>
-          </div>
           <div class="col-2">
-            <strong>Correct?</strong>
+            <strong>Picture</strong>
           </div>
+          <div class="col-8">
+            <strong>Candidate Name</strong>
+          </div>
+          {% comment %} <div class="col-2">
+            <strong>Correct?</strong>
+          </div> {% endcomment %}
           <div class="col-2">
             <strong>Delete?</strong>
           </div>
@@ -36,14 +39,17 @@
         {% for form in formset %}
           <div class="list-group-item">
             <div class="row">
+              {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+              <div class="col-2">
+                {{ form.mugshot|as_crispy_field }}
+              </div>
               <div class="col-8">
-                {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
-                {{ form.text|as_crispy_field }}
+                {{ form.full_name|as_crispy_field }}
                 {% if form.instance.pk and form.text.value != form.instance.text %}<p class="mb-0 mt-1"><small class="text-muted font-italic"><strong>Old answer:</strong> {{ form.instance.text }}</small></p>{% endif %}
               </div>
-              <div class="col-2">
+              {% comment %} <div class="col-2">
                 {{ form.is_correct }}
-              </div>
+              </div> {% endcomment %}
               <div class="col-2">
                 {% if form.instance.pk %}
                   {{ form.DELETE }}
@@ -55,10 +61,10 @@
       </div>
     </div>
     <p>
-      <small class="form-text text-muted">Your question may have at least <strong>2</strong> answers and maximum <strong>10</strong> answers. Select at least one correct answer.</small>
+      <small class="form-text text-muted">This position may have at least <strong>2</strong> candidates and a maximum of <strong>10</strong>.</small>
     </p>
     <button type="submit" class="btn btn-success">Save changes</button>
-    <a href="{% url 'teachers:quiz_change' quiz.pk %}" class="btn btn-outline-secondary" role="button">Nevermind</a>
-    <a href="{% url 'teachers:question_delete' quiz.pk question.pk %}" class="btn btn-danger float-right">Delete</a>
+    <a href="{% url 'teachers:election_change' election.pk %}" class="btn btn-outline-secondary" role="button">Nevermind</a>
+    <a href="{% url 'teachers:position_delete' election.pk position.pk %}" class="btn btn-danger float-right">Delete</a>
   </form>
 {% endblock %}

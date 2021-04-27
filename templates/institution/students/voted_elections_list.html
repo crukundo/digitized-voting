@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% include 'institution/students/_header.html' with active='taken' %}
+  <div class="card">
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Election</th>
+          <th>Faculty</th>
+          {% comment %} <th>Score</th> {% endcomment %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for voted_election in voted_elections %}
+          <tr>
+            <td>{{ voted_election.election.name }}</td>
+            <td>{{ voted_election.election.faculty.get_html_badge }}</td>
+            {% comment %} <td>{{ voted_election.score }}</td> {% endcomment %}
+          </tr>
+        {% empty %}
+          <tr>
+            <td class="bg-light text-center font-italic" colspan="3">You haven't voted in any election yet.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

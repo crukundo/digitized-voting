@@ -91,7 +91,7 @@ class ElectionDeleteView(DeleteView):
 
     def delete(self, request, *args, **kwargs):
         election = self.get_object()
-        messages.success(request, 'The election %s was deleted with success!' % election.name)
+        messages.success(request, 'The election %s was deleted successfully!' % election.name)
         return super().delete(request, *args, **kwargs)
 
     def get_queryset(self):
@@ -107,10 +107,10 @@ class ElectionResultsView(DetailView):
     def get_context_data(self, **kwargs):
         election = self.get_object()
         voted_elections = election.voted_elections.select_related('student__user').order_by('-date')
-        total_voted_elections = voted_elections.count()
+        total_voters = voted_elections.count()
         extra_context = {
             'voted_elections': voted_elections,
-            'total_voted_elections': total_voted_elections,
+            'total_voters': total_voters,
         }
         kwargs.update(extra_context)
         return super().get_context_data(**kwargs)
@@ -158,7 +158,7 @@ def position_change(request, election_pk, position_pk):
         Position,  # parent model
         Candidate,  # base model
         formset=BaseCandidateInlineFormSet,
-        fields=('full_name',),
+        fields=('mugshot','full_name',),
         min_num=2,
         validate_min=True,
         max_num=10,
@@ -172,7 +172,7 @@ def position_change(request, election_pk, position_pk):
             with transaction.atomic():
                 form.save()
                 formset.save()
-            messages.success(request, 'Positions and their candidates saved with success!')
+            messages.success(request, 'Positions and their candidates saved successfully!')
             return redirect('teachers:election_change', election.pk)
     else:
         form = PositionForm(instance=position)
@@ -200,7 +200,7 @@ class PositionDeleteView(DeleteView):
 
     def delete(self, request, *args, **kwargs):
         position = self.get_object()
-        messages.success(request, 'The position %s was deleted with success!' % position.text)
+        messages.success(request, 'The position %s was deleted successfully!' % position.text)
         return super().delete(request, *args, **kwargs)
 
     def get_queryset(self):
