@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">All Elections</li>
+    </ol>
+  </nav>
+  <h2 class="mb-3">All Elections</h2>
+  <a href="{% url 'teachers:election_add' %}" class="btn btn-primary mb-3" role="button">Create election</a>
+  <div class="card">
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Election</th>
+          <th>Faculty</th>
+          <th>Positions</th>
+          <th>Voted</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for quiz in quizzes %}
+          <tr>
+            <td class="align-middle"><a href="{% url 'teachers:quiz_change' quiz.pk %}">{{ election.name }}</a></td>
+            <td class="align-middle">{{ election.faculty.get_html_badge }}</td>
+            <td class="align-middle">{{ election.positions_count }}</td>
+            <td class="align-middle">{{ election.taken_count }}</td>
+            <td class="text-right">
+              <a href="{% url 'teachers:election_results' election.pk %}" class="btn btn-primary">View results</a>
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td class="bg-light text-center font-italic" colspan="5">You haven't created any election yet.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

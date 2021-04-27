@@ -25,15 +25,15 @@ class StudentSignUpView(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('students:quiz_list')
+        return redirect('students:election_list')
 
 
 @method_decorator([login_required, student_required], name='dispatch')
 class StudentFacultyView(UpdateView):
     model = Student
     form_class = StudentFacultyForm
-    template_name = 'institution/students/interests_form.html'
-    success_url = reverse_lazy('students:quiz_list')
+    template_name = 'institution/students/faculty_form.html'
+    success_url = reverse_lazy('students:election_list')
 
     def get_object(self):
         return self.request.user.student
@@ -48,7 +48,7 @@ class ElectionListView(ListView):
     model = Election
     ordering = ('name', )
     context_object_name = 'elections'
-    template_name = 'institution/students/quiz_list.html'
+    template_name = 'institution/students/election_list.html'
 
     def get_queryset(self):
         student = self.request.user.student
@@ -81,7 +81,7 @@ def vote(request, pk):
     student = request.user.student
 
     if student.elections.filter(pk=pk).exists():
-        return render(request, 'students/voted_election.html')
+        return render(request, 'students/voted_elections_list.html')
 
     total_positions = election.positions.count()
     unvoted_positions = student.get_unvoted_positions(election)

@@ -27,7 +27,7 @@ class TeacherSignUpView(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('teachers:quiz_change_list')
+        return redirect('teachers:election_change_list')
 
 
 @method_decorator([login_required, teacher_required], name='dispatch')
@@ -35,7 +35,7 @@ class ElectionsListView(ListView):
     model = Election
     ordering = ('name', )
     context_object_name = 'elections'
-    template_name = 'institution/teachers/elections_change_list.html'
+    template_name = 'institution/teachers/election_change_list.html'
 
     def get_queryset(self):
         queryset = self.request.user.elections \

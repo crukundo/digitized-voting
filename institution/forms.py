@@ -20,6 +20,8 @@ class TeacherSignUpForm(UserCreationForm):
 
 
 class StudentSignUpForm(UserCreationForm):
+    email = forms.EmailField(label="Email address", required=False)
+    mobile = forms.CharField(label="Mobile number", required=False)
     faculty = forms.ModelMultipleChoiceField(
         queryset=Faculty.objects.all(),
         widget=forms.CheckboxSelectMultiple,
