@@ -5,7 +5,7 @@ from django.utils.html import escape, mark_safe
 
 class User(AbstractUser):
     is_student = models.BooleanField(default=False)
-    is_teacher = models.BooleanField(default=False)
+    is_ec_officer = models.BooleanField(default=False)
 
 
 class Faculty(models.Model):

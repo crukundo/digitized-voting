@@ -8,8 +8,8 @@ class SignUpView(TemplateView):
 
 def home(request):
     if request.user.is_authenticated:
-        if request.user.is_teacher:
-            return redirect('teachers:election_change_list')
+        if request.user.is_ec_officer:
+            return redirect('ec:election_change_list')
         else:
             return redirect('students:election_list')
     return render(request, 'institution/home.html')

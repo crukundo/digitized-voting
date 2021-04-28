@@ -1,18 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Welcome to the Django Schools! <span class="icon-emo-happy"></span></h2>
+  <h2>Welcome to the digitized voting system! <span class="icon-emo-happy"></span></h2>
   <p class="lead">
-    If you already have an account, go ahead and <a href="{% url 'login' %}">log in</a>. If you are new to Django Schools, get started
-    by creating a <a href="{% url 'student_signup' %}">student account</a> or a <a href="{% url 'teacher_signup' %}">teacher account</a>.
+    If you already have an account, go ahead and <a href="{% url 'login' %}">log in</a>. If you are new to this system, get started
+    by creating your <a href="{% url 'student_signup' %}">student account</a> so you can vote your candidates
+     {% comment %} or a <a href="{% url 'ec_signup' %}">teacher account</a>. {% endcomment %}
   </p>
   <hr>
   <h3>What's this about?</h3>
   <p>
-    This Django application is an example I created to illustrate a <a href="https://simpleisbetterthancomplex.com/tutorial/2018/01/18/how-to-implement-multiple-user-types-with-django.html">blog post about how to implement multiple user types</a>.
-    In this application, users can sign up as a student or a teacher. Teachers can create quizzes and students can answer quizzes
-    based on their interests.
+    The digitized voting system is the final deliverable on my research project for the BCS course I am pursuing at Cavendish University.
+    This follows research carried out at Makerere University to ascertain whether the current voting system is effective or efficient. 
+    <br><br>Research showed there was a great need for a digitized voting system in touch with the modern technological landscape that exists today, 
+    one that will save any institution money, hasten the election process, offer more accuracy and efficiency and especially, a robust 
+    system that will serve the institution in times like today with COVID-19 where most academic institutions are still under lockdown.
   </p>
-  <p>Want to run this code locally? <a href="https://github.com/sibtc/django-multiple-user-types-example/blob/master/README.md">Read detailed instructions on how to run this project</a>.</p>
-  <p class="mb-0">Vitor Freitas<br><a href="https://twitter.com/vitorfs/">@vitorfs</a></p>
+  <p>Want to run this code locally? <a target="_blank" href="https://github.com/crukundo/digitized-voting/blob/master/README.md">Read detailed instructions on how to run this project</a>.</p>
+  <p class="mb-0">Collin Rukundo<br><a target="_blank" href="https://github.com/crukundo">Student, Cavendish University Uganda</a></p>
 {% endblock %}

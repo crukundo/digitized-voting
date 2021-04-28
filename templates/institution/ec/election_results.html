@@ -5,8 +5,8 @@
 {% block content %}
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{% url 'teachers:election_change_list' %}">All Elections</a></li>
-      <li class="breadcrumb-item"><a href="{% url 'teachers:election_change' election.pk %}">{{ election.name }}</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'ec:election_change_list' %}">All Elections</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'ec:election_change' election.pk %}">{{ election.name }}</a></li>
       <li class="breadcrumb-item active" aria-current="page">Results</li>
     </ol>
   </nav>

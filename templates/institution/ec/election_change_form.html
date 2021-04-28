@@ -5,13 +5,13 @@
 {% block content %}
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{% url 'teachers:election_change_list' %}">All Elections</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'ec:election_change_list' %}">All Elections</a></li>
       <li class="breadcrumb-item active" aria-current="page">{{ election.name }}</li>
     </ol>
   </nav>
   <h2 class="mb-3">
-    {{ quiz.name }}
-    <a href="{% url 'teachers:election_results' election.pk %}" class="btn btn-primary float-right">View results</a>
+    {{ election.name }}
+    <a href="{% url 'ec:election_results' election.pk %}" class="btn btn-primary float-right">View results</a>
   </h2>
   <div class="row mb-3">
     <div class="col-md-6 col-sm-8 col-12">
@@ -19,8 +19,8 @@
         {% csrf_token %}
         {{ form|crispy }}
         <button type="submit" class="btn btn-success">Save changes</button>
-        <a href="{% url 'teachers:election_change_list' %}" class="btn btn-outline-secondary" role="button">Nevermind</a>
-        <a href="{% url 'teachers:election_delete' election.pk %}" class="btn btn-danger float-right">Delete</a>
+        <a href="{% url 'ec:election_change_list' %}" class="btn btn-outline-secondary" role="button">Nevermind</a>
+        <a href="{% url 'ec:election_delete' election.pk %}" class="btn btn-danger float-right">Delete</a>
       </form>
     </div>
   </div>
@@ -40,7 +40,7 @@
         <div class="list-group-item">
           <div class="row">
             <div class="col-10">
-              <a href="{% url 'teachers:position_change' election.pk position.pk %}">{{ position.text }}</a>
+              <a href="{% url 'ec:position_change' election.pk position.pk %}">{{ position.text }}</a>
             </div>
             <div class="col-2">
               {{ position.candidates_count }}
@@ -49,12 +49,12 @@
         </div>
       {% empty %}
         <div class="list-group-item text-center">
-          <p class="text-muted font-italic mb-0">You haven't created any positions yet. Go ahead and <a href="{% url 'teachers:position_add' election.pk %}">add the first position</a>.</p>
+          <p class="text-muted font-italic mb-0">You haven't created any positions yet. Go ahead and <a href="{% url 'ec:position_add' election.pk %}">add the first position</a>.</p>
         </div>
       {% endfor %}
     </div>
     <div class="card-footer">
-      <a href="{% url 'teachers:position_add' election.pk %}" class="btn btn-primary btn-sm">Add position</a>
+      <a href="{% url 'ec:position_add' election.pk %}" class="btn btn-primary btn-sm">Add position</a>
     </div>
   </div>
 {% endblock %}

@@ -5,8 +5,8 @@
 {% block content %}
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{% url 'teachers:election_change_list' %}">All Elections</a></li>
-      <li class="breadcrumb-item"><a href="{% url 'teachers:election_change' election.pk %}">{{ election.name }}</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'ec:election_change_list' %}">All Elections</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'ec:election_change' election.pk %}">{{ election.name }}</a></li>
       <li class="breadcrumb-item active" aria-current="page">{{ position.text }}</li>
     </ol>
   </nav>
@@ -64,7 +64,7 @@
       <small class="form-text text-muted">This position may have at least <strong>2</strong> candidates and a maximum of <strong>10</strong>.</small>
     </p>
     <button type="submit" class="btn btn-success">Save changes</button>
-    <a href="{% url 'teachers:election_change' election.pk %}" class="btn btn-outline-secondary" role="button">Nevermind</a>
-    <a href="{% url 'teachers:position_delete' election.pk position.pk %}" class="btn btn-danger float-right">Delete</a>
+    <a href="{% url 'ec:election_change' election.pk %}" class="btn btn-outline-secondary" role="button">Nevermind</a>
+    <a href="{% url 'ec:position_delete' election.pk position.pk %}" class="btn btn-danger float-right">Delete</a>
   </form>
 {% endblock %}

@@ -5,6 +5,14 @@
 
 This is a project to complement by research and in fulfillment of my computer science degree. The project offers an effective solution to the expensive, time-consuming elections across most Academic Institutions. COVID-19 brought everything to a standstill in 2020 and this partly inspired research into this. 
 
+### Stack ###
+Django Framework
+Bootstrap CSS Framework
+JQuery
+SQLite
+
+NB: Please use POSTGRES when in production since SQLite just wasn't built for that.
+
 ## Running the Project Locally
 
 First, clone the repository to your local machine:

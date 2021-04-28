@@ -7,13 +7,13 @@ from institution.models import (Candidate, Position, Student, VotedElection,
                               Faculty, User)
 
 
-class TeacherSignUpForm(UserCreationForm):
+class ECOfficerSignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
 
     def save(self, commit=True):
         user = super().save(commit=False)
-        user.is_teacher = True
+        user.is_ec_officer = True
         if commit:
             user.save()
         return user

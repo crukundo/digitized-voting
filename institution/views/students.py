@@ -101,7 +101,7 @@ def vote(request, pk):
                 else:
                     correct_answers = student.voted_elections.filter(candidate__position__election=election).count()
                     VotedElection.objects.create(student=student, election=election)
-                    messages.success(request, 'Congratulations! You voted in the %s election successfully!' % (quiz.name))
+                    messages.success(request, 'Congratulations! You voted in the %s election successfully!' % (election.name))
                     return redirect('students:elections_list')
     else:
         form = VoteForm(position=position)
