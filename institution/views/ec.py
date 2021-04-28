@@ -56,7 +56,7 @@ class ElectionsCreateView(CreateView):
         election.owner = self.request.user
         election.save()
         messages.success(self.request, 'The election was created successfully! Go ahead and add some positions now.')
-        return redirect('ec:elections_change', election.pk)
+        return redirect('ec:election_change', election.pk)
 
 
 @method_decorator([login_required, ec_official_required], name='dispatch')
@@ -79,7 +79,7 @@ class ElectionUpdateView(UpdateView):
         return self.request.user.elections.all()
 
     def get_success_url(self):
-        return reverse('ec:elections_change', kwargs={'pk': self.object.pk})
+        return reverse('ec:election_change', kwargs={'pk': self.object.pk})
 
 
 @method_decorator([login_required, ec_official_required], name='dispatch')

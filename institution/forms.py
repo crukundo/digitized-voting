@@ -19,8 +19,8 @@ class ECOfficerSignUpForm(UserCreationForm):
 
 
 class StudentSignUpForm(UserCreationForm):
-    email = forms.EmailField(label="Email address", required=False)
-    mobile = forms.CharField(label="Mobile number", required=False)
+    mobile = forms.CharField(label="Mobile number", required=True, help_text="For communication purposes")
+    student_number = forms.CharField(label="Student Number", required=True, help_text="As it appears on your ID")
     faculty = forms.ModelMultipleChoiceField(
         queryset=Faculty.objects.all(),
         widget=forms.CheckboxSelectMultiple,

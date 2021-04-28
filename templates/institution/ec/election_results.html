@@ -14,21 +14,20 @@
 
   <div class="card">
     <div class="card-header">
-      <strong>Elections You Voted In</strong>
-      <span class="badge badge-pill badge-primary float-right">Average Score: {{ quiz_score.average_score|default_if_none:0.0 }}</span>
+      <strong>Voters</strong>
+      <span class="badge badge-pill badge-primary float-right">Winner: {{ quiz_score.average_score|default_if_none:0.0 }}</span>
     </div>
     <table class="table mb-0">
       <thead>
         <tr>
-          <th>Student</th>
+          <th>Student(ID)</th>
           <th>Date</th>
-          <th>Score</th>
         </tr>
       </thead>
       <tbody>
         {% for voted_election in voted_elections %}
           <tr>
-            <td>{{ voted_election.student.user.username }}</td>
+            <td>{{ voted_election.student.user.username }} ({{ voted_election.student.student_number }})</td>
             <td>{{ voted_election.date|naturaltime }}</td>
           </tr>
         {% endfor %}

@@ -52,8 +52,8 @@ class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     elections = models.ManyToManyField(Election, through='VotedElection')
     faculty = models.ManyToManyField(Faculty, related_name='student_faculty')
-    email = models.EmailField(default=False, blank=True, null=True)
-    mobile = models.CharField(blank=True, max_length=20, null=True)
+    mobile = models.CharField(blank=False, max_length=20, null=True)
+    student_number = models.CharField(blank=False, max_length=20, null=True)
 
     def get_unvoted_positions(self, election):
         voted_positions = self.election_candidate \

@@ -8,12 +8,16 @@ This is a project to complement by research and in fulfillment of my computer sc
 ### Stack ###
 1. Django Framework
 2. Bootstrap CSS Framework
-3. JQuery
-4. SQLite
 
-**Note:** Please use POSTGRES when in production since SQLite just wasn't built for that.
+**Important:** Local database is SQLite3. But please use POSTGRES when in production since SQLite just wasn't built for that.
 
-## Running the Project Locally
+### Desired / TODO ###
+1. Sign in process should use OTP. Student enters email/mobile number already on file at the university, receives OTP and enters this to verify identity and login. 
+2. Once signed in, Student has 5 minutes to vote in any election or else timed out. Logging back in is only after 30mins
+3. On the voting screen, radio buttons should consist of clear poster images of the candidates.
+
+
+### Running the Project Locally
 
 First, clone the repository to your local machine:
 
@@ -42,6 +46,12 @@ python manage.py runserver
 The project will be available at **127.0.0.1:8000**
 
 
-## License
+### License
 
 The source code is released under the [MIT License](https://github.com/crukundo/digitized-voting/blob/master/LICENSE).
+
+### Demo Credentials
+
+**EC Officer**: username: officer, password: ultimate012
+
+You can create a new EC officer here: http://127.0.0.1:8000/accounts/signup/ec/ (testing purposes only.)
