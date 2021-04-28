@@ -23,7 +23,7 @@ def ec_official_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME,
     redirects to the log-in page if necessary.
     '''
     actual_decorator = user_passes_test(
-        lambda u: u.is_active and u.is_teacher,
+        lambda u: u.is_active and u.is_ec_officer,
         login_url=login_url,
         redirect_field_name=redirect_field_name
     )

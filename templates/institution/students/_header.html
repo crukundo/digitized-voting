@@ -6,9 +6,9 @@
 
 <ul class="nav nav-tabs mb-3">
   <li class="nav-item">
-    <a class="nav-link{% if active == 'new' %} active{% endif %}" href="{% url 'students:election_list' %}">New</a>
+    <a class="nav-link{% if active == 'new' %} active{% endif %}" href="{% url 'students:election_list' %}">Pending Elections</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link{% if active == 'taken' %} active{% endif %}" href="{% url 'students:voted_elections_list' %}">Taken</a>
+    <a class="nav-link{% if active == 'taken' %} active{% endif %}" href="{% url 'students:voted_elections_list' %}">Completed Elections</a>
   </li>
 </ul>

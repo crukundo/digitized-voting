@@ -3,8 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 from django.forms.utils import ValidationError
 
-from institution.models import (Candidate, Position, Student, VotedElection,
-                              Faculty, User)
+from institution.models import (Candidate, Position, Student, VotedElection, StudentVote, Faculty, User)
 
 
 class ECOfficerSignUpForm(UserCreationForm):
@@ -71,7 +70,7 @@ class VoteForm(forms.ModelForm):
         help_text="Select your desired candidate and hit next")
 
     class Meta:
-        model = VotedElection
+        model = StudentVote
         fields = ('candidate', )
 
     def __init__(self, *args, **kwargs):

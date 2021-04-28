@@ -99,10 +99,9 @@ def vote(request, pk):
                 if student.get_unvoted_positions(election).exists():
                     return redirect('students:vote', pk)
                 else:
-                    correct_answers = student.voted_elections.filter(candidate__position__election=election).count()
                     VotedElection.objects.create(student=student, election=election)
                     messages.success(request, 'Congratulations! You voted in the %s election successfully!' % (election.name))
-                    return redirect('students:elections_list')
+                    return redirect('students:election_list')
     else:
         form = VoteForm(position=position)
 
